@@ -7,7 +7,10 @@ authors = [
     { name = "Kai Krings", email = "kai.krings@posteo.de" }
 ]
 requires-python = ">=3.10"
-dependencies = []
+dependencies = [
+    "fastai>=2.7.18",
+    "transformers>=4.48.3",
+]
 
 [build-system]
 requires = ["hatchling"]
