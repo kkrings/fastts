@@ -1,0 +1,14 @@
+[project]
+name = "fastai-transformers"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+authors = [
+    { name = "Kai Krings", email = "kai.krings@posteo.de" }
+]
+requires-python = ">=3.10"
+dependencies = []
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
