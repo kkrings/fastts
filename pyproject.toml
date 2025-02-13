@@ -1,7 +1,7 @@
 [project]
 name = "fastai-transformers"
 version = "0.1.0"
-description = "Add your description here"
+description = "Text classification via fastai and transformers"
 readme = "README.md"
 authors = [
     { name = "Kai Krings", email = "kai.krings@posteo.de" }
@@ -12,3 +12,22 @@ dependencies = []
 [build-system]
 requires = ["hatchling"]
 build-backend = "hatchling.build"
+
+[dependency-groups]
+dev = [
+    "mypy>=1.15.0",
+    "ruff>=0.9.6",
+]
+
+[tool.uv]
+cache-dir = ".cache/uv"
+
+[tool.ruff]
+cache-dir = ".cache/ruff"
+
+[tool.ruff.lint]
+select = ["E4", "E7", "E9", "F", "I"]
+
+[tool.mypy]
+cache_dir = ".cache/mypy"
+strict = true
