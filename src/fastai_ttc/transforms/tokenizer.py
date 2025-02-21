@@ -6,13 +6,21 @@ from fastai_ttc.transforms.types import TransformCallKwargs
 
 
 class TTCTokenizer(Transform):  # type: ignore
-    def __init__(self, tokenizer: PreTrainedTokenizerBase) -> None:
+    def __init__(
+        self, tokenizer: PreTrainedTokenizerBase, truncation: bool = False
+    ) -> None:
         self._tokenizer = tokenizer
+        self._truncation = truncation
 
     def __call__(
         self, batch: list[tuple[str, TensorCategory]], **_: Unpack[TransformCallKwargs]
     ) -> tuple[tuple[TensorText, TensorCategory], ...]:
-        xb = self._tokenizer([x for x, _ in batch], padding=True, return_tensors="pt")
+        xb = self._tokenizer(
+            [x for x, _ in batch],
+            padding=True,
+            truncation=self._truncation,
+            return_tensors="pt",
+        )
 
         return tuple(
             zip(
