@@ -1,5 +1,5 @@
 [project]
-name = "fastai-transformers"
+name = "fastai-ttc"
 version = "0.1.0"
 description = "Text classification via fastai and transformers"
 readme = "README.md"
