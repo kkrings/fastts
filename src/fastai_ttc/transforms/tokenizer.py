@@ -22,9 +22,8 @@ class TTCTokenizer(Transform):  # type: ignore
             return_tensors="pt",
         )
 
-        return tuple(
-            zip(
-                (x for x in TensorText(L(xb.values()).stack(dim=-1))),
-                (y for _, y in batch),
-            )
+        xbt = TensorText(
+            L(xb.values(), keys_along_last_dim=tuple(xb.keys())).stack(dim=-1)
         )
+
+        return tuple(zip((x for x in xbt), (y for _, y in batch)))
