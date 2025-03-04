@@ -23,7 +23,7 @@ class TTCTokenizer(Transform):  # type: ignore
         )
 
         xbt = TensorText(
-            L(xb.values(), keys_along_last_dim=tuple(xb.keys())).stack(dim=-1)
+            L(xb.values()).stack(dim=-1), keys_along_last_dim=tuple(xb.keys())
         )
 
         return tuple(zip((x for x in xbt), (y for _, y in batch)))
