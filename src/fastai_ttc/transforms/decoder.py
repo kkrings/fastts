@@ -9,7 +9,6 @@ class TTCDecoder(Transform):  # type: ignore
     def decodes(self, x: TensorText) -> TitledStr:
         return TitledStr(
             self._tokenizer.decode(
-                x[..., x.keys_along_last_dim.index("input_ids")],
-                skip_special_tokens=True,
+                token_ids=x[..., x.keys_along_last_dim.index("input_ids")]
             )
         )
