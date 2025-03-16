@@ -1,14 +1,23 @@
+from typing import cast
+
 import pandas as pd
 import pytest
+import torch
 from fastai.text.all import (  # type: ignore
     ColReader,
     ColSplitter,
     DataBlock,
     DataLoaders,
+    Learner,
     RegressionBlock,
 )
-from transformers import AutoTokenizer, PreTrainedTokenizerBase  # type: ignore
+from transformers import (  # type: ignore
+    AutoModelForSequenceClassification,
+    AutoTokenizer,
+    PreTrainedTokenizerBase,
+)
 
+from fastai_ttc.callbacks.model import TTCModel
 from fastai_ttc.transforms.block import TTCBlock
 
 
@@ -18,6 +27,17 @@ def tokenizer(tmp_path_factory: pytest.TempPathFactory) -> PreTrainedTokenizerBa
         "distilbert/distilbert-base-uncased",
         cache_dir=tmp_path_factory.mktemp("tokenizer"),
     )
+
+
+@pytest.fixture(scope="session")
+def model(tmp_path_factory: pytest.TempPathFactory) -> torch.nn.Module:
+    model = AutoModelForSequenceClassification.from_pretrained(
+        "distilbert/distilbert-base-uncased",
+        cache_dir=tmp_path_factory.mktemp("model"),
+        num_labels=1,
+    )
+
+    return cast(torch.nn.Module, model)
 
 
 @pytest.fixture
@@ -53,3 +73,8 @@ def df() -> pd.DataFrame:
 @pytest.fixture
 def dls(dblock: DataBlock, df: pd.DataFrame) -> DataLoaders:
     return dblock.dataloaders(df, bs=1)
+
+
+@pytest.fixture
+def learn(dls: DataLoaders, model: torch.nn.Module) -> Learner:
+    return Learner(dls, model, cbs=[TTCModel])
