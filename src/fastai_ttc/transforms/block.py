@@ -1,8 +1,8 @@
-from fastai.text.all import SortedDL, TransformBlock  # type: ignore
+from fastai.text.all import SortedDL, Transform, TransformBlock  # type: ignore
 from transformers import PreTrainedTokenizerBase  # type: ignore
 
-from fastai_ttc.transforms.decoder import TTCDecoder
-from fastai_ttc.transforms.tokenizer import TTCTokenizer
+from fastai_ttc.transforms.decode import DecodeInputIds, input_ids_to_tensor_text
+from fastai_ttc.transforms.encode import TokenizeText, text_to_text_batch
 
 
 class TTCBlock(TransformBlock):  # type: ignore
@@ -10,7 +10,13 @@ class TTCBlock(TransformBlock):  # type: ignore
         self, tokenizer: PreTrainedTokenizerBase, truncation: bool = False
     ) -> None:
         super().__init__(
-            type_tfms=[TTCDecoder(tokenizer)],
+            type_tfms=[
+                Transform(text_to_text_batch),
+                DecodeInputIds(tokenizer),
+            ],
+            batch_tfms=[
+                TokenizeText(tokenizer, truncation),
+                Transform(dec=input_ids_to_tensor_text),
+            ],
             dl_type=SortedDL,
-            dls_kwargs={"before_batch": TTCTokenizer(tokenizer, truncation)},
         )
