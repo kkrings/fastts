@@ -5,7 +5,7 @@ from transformers import PreTrainedTokenizerBase  # type: ignore
 
 
 def test_transforms(dls: DataLoaders, text: str, target: float) -> None:
-    batch = dls.decode_batch(dls.one_batch())
+    batch = dls.show_batch(show=False)[-1]
     assert batch == [(text, target)]
 
 
