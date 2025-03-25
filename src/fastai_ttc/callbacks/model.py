@@ -8,7 +8,7 @@ from transformers import BatchEncoding  # type: ignore
 _Pred = TypeVar("_Pred")
 
 
-class TTCModel(Callback):  # type: ignore
+class TransformersModel(Callback):  # type: ignore
     def __init__(self) -> None:
         self._model: torch.nn.Module | None = None
 

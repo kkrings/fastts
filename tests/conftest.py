@@ -17,7 +17,7 @@ from transformers import (  # type: ignore
     PreTrainedTokenizerBase,
 )
 
-from fastai_ttc.callbacks.model import TTCModel
+from fastai_ttc.callbacks.model import TransformersModel
 from fastai_ttc.transforms.block import TTCBlock
 
 
@@ -77,4 +77,4 @@ def dls(dblock: DataBlock, df: pd.DataFrame) -> DataLoaders:
 
 @pytest.fixture
 def learn(dls: DataLoaders, model: torch.nn.Module) -> Learner:
-    return Learner(dls, model, cbs=[TTCModel])
+    return Learner(dls, model, cbs=[TransformersModel])

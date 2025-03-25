@@ -7,7 +7,7 @@ import pytest
 from pytest_mock import MockerFixture
 from transformers import BatchEncoding  # type: ignore
 
-from fastai_ttc.callbacks.model import TTCModel
+from fastai_ttc.callbacks.model import TransformersModel
 
 
 @dataclass
@@ -16,7 +16,7 @@ class FakeLearner:
 
 
 def test_transformers_model_before_batch(
-    cb: TTCModel,
+    cb: TransformersModel,
     learn: FakeLearner,
     xb: tuple[BatchEncoding],
     model: MagicMock,
@@ -28,7 +28,7 @@ def test_transformers_model_before_batch(
 
 
 def test_transformers_model_after_pred(
-    cb: TTCModel, learn: FakeLearner, model: MagicMock
+    cb: TransformersModel, learn: FakeLearner, model: MagicMock
 ) -> None:
     cb("before_batch")
     cb("after_pred")
@@ -46,8 +46,8 @@ def learn(model: MagicMock) -> FakeLearner:
 
 
 @pytest.fixture
-def cb(learn: FakeLearner) -> TTCModel:
-    cb = TTCModel()
+def cb(learn: FakeLearner) -> TransformersModel:
+    cb = TransformersModel()
     cb.learn = learn
     return cb
 

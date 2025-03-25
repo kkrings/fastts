@@ -5,7 +5,7 @@ from fastai.text.all import DataLoaders  # type: ignore
 from transformers import PreTrainedTokenizerBase  # type: ignore
 from transformers.modeling_outputs import SequenceClassifierOutput  # type: ignore
 
-from fastai_ttc.callbacks.model import TTCModel
+from fastai_ttc.callbacks.model import TransformersModel
 from fastai_ttc.callbacks.models.distilbert import DistilBERTArgs
 from tests.utils.learner import Learner, is_distilbert_args
 
@@ -15,7 +15,7 @@ from tests.utils.learner import Learner, is_distilbert_args
     [(torch.tensor([1.0]), torch.tensor([0.5]), True)],
 )
 def test_ttc_model_before_batch(
-    cb: TTCModel,
+    cb: TransformersModel,
     dls: DataLoaders,
     loss: torch.FloatTensor,
     model_output: SequenceClassifierOutput,
@@ -35,7 +35,7 @@ def test_ttc_model_before_batch(
     [(torch.tensor([1.0]), torch.tensor([0.5]), True)],
 )
 def test_ttc_model_after_pred(
-    cb: TTCModel,
+    cb: TransformersModel,
     dls: DataLoaders,
     loss: torch.FloatTensor,
     model_output: SequenceClassifierOutput,
@@ -57,7 +57,7 @@ def test_ttc_model_after_pred(
     ],
 )
 def test_ttc_model_after_loss(
-    cb: TTCModel,
+    cb: TransformersModel,
     dls: DataLoaders,
     loss: torch.FloatTensor,
     model_output: SequenceClassifierOutput,
@@ -78,8 +78,8 @@ def model_output(model_loss: torch.FloatTensor | None) -> SequenceClassifierOutp
 
 
 @pytest.fixture
-def cb(use_loss_from_model: bool) -> TTCModel:
-    return TTCModel(use_loss_from_model)
+def cb(use_loss_from_model: bool) -> TransformersModel:
+    return TransformersModel(use_loss_from_model)
 
 
 @pytest.fixture
