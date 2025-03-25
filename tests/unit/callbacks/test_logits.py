@@ -12,7 +12,7 @@ class FakeLearner:
     pred: SequenceClassifierOutput | torch.Tensor
 
 
-def test_loss_from_model(
+def test_logits_to_pred(
     cb: LogitsToPred, learn: FakeLearner, pred: SequenceClassifierOutput
 ) -> None:
     cb("after_pred")
