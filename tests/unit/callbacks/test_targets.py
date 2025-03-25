@@ -19,8 +19,7 @@ def test_targets_as_labels(
     cb: TargetsAsLabels, learn: FakeLearner, y: torch.Tensor
 ) -> None:
     cb("before_batch")
-    assert "labels" in learn.x
-    assert torch.all(torch.isclose(learn.x["labels"], y))
+    assert torch.all(torch.isclose(learn.xb[0]["labels"], y))
 
 
 @pytest.fixture
