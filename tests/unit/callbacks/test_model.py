@@ -7,7 +7,7 @@ import pytest
 from pytest_mock import MockerFixture
 from transformers import BatchEncoding  # type: ignore
 
-from fastai_ttc.callbacks.model import TransformersModel
+from fastts.callbacks.model import TransformersModel
 
 
 @dataclass

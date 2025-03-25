@@ -4,7 +4,7 @@ import pytest
 import torch
 from transformers.modeling_outputs import SequenceClassifierOutput  # type: ignore
 
-from fastai_ttc.callbacks.logits import LogitsToPred
+from fastts.callbacks.logits import LogitsToPred
 
 
 @dataclass

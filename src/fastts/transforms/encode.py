@@ -1,7 +1,7 @@
 from fastai.text.all import Transform, typedispatch  # type: ignore
 from transformers import BatchEncoding, PreTrainedTokenizerBase  # type: ignore
 
-from fastai_ttc.types.textbatch import TextBatch
+from fastts.types.textbatch import TextBatch
 
 
 @typedispatch  # type: ignore

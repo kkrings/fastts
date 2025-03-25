@@ -4,7 +4,7 @@ import pytest
 import torch
 from transformers import BatchEncoding  # type: ignore
 
-from fastai_ttc.callbacks.targets import TargetsAsLabels
+from fastts.callbacks.targets import TargetsAsLabels
 
 
 @dataclass

@@ -17,11 +17,11 @@ from transformers import (  # type: ignore
     PreTrainedTokenizerBase,
 )
 
-from fastai_ttc.callbacks.logits import LogitsToPred
-from fastai_ttc.callbacks.loss import LossFromModel
-from fastai_ttc.callbacks.model import TransformersModel
-from fastai_ttc.callbacks.targets import TargetsAsLabels
-from fastai_ttc.transforms.block import TransformersTextBlock
+from fastts.callbacks.logits import LogitsToPred
+from fastts.callbacks.loss import LossFromModel
+from fastts.callbacks.model import TransformersModel
+from fastts.callbacks.targets import TargetsAsLabels
+from fastts.transforms.block import TransformersTextBlock
 
 
 @pytest.fixture(scope="session")
