@@ -21,7 +21,7 @@ from fastai_ttc.callbacks.logits import LogitsToPred
 from fastai_ttc.callbacks.loss import LossFromModel
 from fastai_ttc.callbacks.model import TransformersModel
 from fastai_ttc.callbacks.targets import TargetsAsLabels
-from fastai_ttc.transforms.block import TTCBlock
+from fastai_ttc.transforms.block import TransformersTextBlock
 
 
 @pytest.fixture(scope="session")
@@ -46,7 +46,7 @@ def model(tmp_path_factory: pytest.TempPathFactory) -> torch.nn.Module:
 @pytest.fixture
 def dblock(tokenizer: PreTrainedTokenizerBase) -> DataBlock:
     return DataBlock(
-        blocks=(TTCBlock(tokenizer), RegressionBlock),
+        blocks=(TransformersTextBlock(tokenizer), RegressionBlock),
         get_x=ColReader("input"),
         get_y=ColReader("target"),
         splitter=ColSplitter("validation"),

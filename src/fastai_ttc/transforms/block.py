@@ -5,7 +5,7 @@ from fastai_ttc.transforms.decode import DecodeInputIds, input_ids_to_tensor_tex
 from fastai_ttc.transforms.encode import TokenizeText, text_to_text_batch
 
 
-class TTCBlock(TransformBlock):  # type: ignore
+class TransformersTextBlock(TransformBlock):  # type: ignore
     def __init__(
         self, tokenizer: PreTrainedTokenizerBase, truncation: bool = False
     ) -> None:
