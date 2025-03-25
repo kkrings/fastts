@@ -1,22 +1,27 @@
+from collections.abc import Callable
+from typing import TypeVar
+
 import torch
 from fastai.text.all import Callback  # type: ignore
+from transformers import BatchEncoding  # type: ignore
+
+_Pred = TypeVar("_Pred")
 
 
 class TTCModel(Callback):  # type: ignore
-    def __init__(self, use_loss_from_model: bool = False) -> None:
-        self._use_loss_from_model = use_loss_from_model
-        self._loss_from_model: torch.FloatTensor | None = None
+    def __init__(self) -> None:
+        self._model: torch.nn.Module | None = None
 
     def before_batch(self) -> None:
-        self.learn.xb = (self.x["input_ids"], self.x["attention_mask"])
+        self._model = self.model
+        self.learn.model = self._wrap_model(self.model)
 
     def after_pred(self) -> None:
-        self._loss_from_model = self.pred.loss
-        self.learn.pred = self.pred.logits
+        self.learn.model = self._model
 
-    def after_loss(self) -> None:
-        if not self._use_loss_from_model or self._loss_from_model is None:
-            return
+    @staticmethod
+    def _wrap_model(model: Callable[..., _Pred]) -> Callable[[BatchEncoding], _Pred]:
+        def wrapper(x: BatchEncoding) -> _Pred:
+            return model(**x)
 
-        self.learn.loss_grad = self._loss_from_model
-        self.learn.loss = self.loss_grad.clone()
+        return wrapper
