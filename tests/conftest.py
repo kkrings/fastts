@@ -17,10 +17,7 @@ from transformers import (  # type: ignore
     PreTrainedTokenizerBase,
 )
 
-from fastts.callbacks.logits import LogitsToPred
-from fastts.callbacks.loss import LossFromModel
-from fastts.callbacks.model import TransformersModel
-from fastts.callbacks.targets import TargetsAsLabels
+from fastts.callbacks.classification.sequence import sequence_classification
 from fastts.transforms.block import TransformersTextBlock
 
 
@@ -80,8 +77,4 @@ def dls(dblock: DataBlock, df: pd.DataFrame) -> DataLoaders:
 
 @pytest.fixture
 def learn(dls: DataLoaders, model: torch.nn.Module) -> Learner:
-    return Learner(
-        dls,
-        model,
-        cbs=[TransformersModel, TargetsAsLabels, LossFromModel, LogitsToPred],
-    )
+    return Learner(dls, model, cbs=list(sequence_classification(loss_from_model=True)))
