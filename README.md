@@ -1,4 +1,4 @@
-# fastai-ttc
+# fastts
 
 Text classification via [fastai][] and [transformers][]
 
