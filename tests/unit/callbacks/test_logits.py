@@ -2,7 +2,7 @@ from dataclasses import dataclass
 
 import pytest
 import torch
-from transformers.modeling_outputs import SequenceClassifierOutput  # type: ignore
+from transformers.modeling_outputs import SequenceClassifierOutput
 
 from fastts.callbacks.logits import LogitsToPred
 
@@ -13,15 +13,21 @@ class FakeLearner:
 
 
 def test_logits_to_pred(
-    cb: LogitsToPred, learn: FakeLearner, pred: SequenceClassifierOutput
+    cb: LogitsToPred, learn: FakeLearner, logits: torch.Tensor
 ) -> None:
     cb("after_pred")
-    assert torch.all(torch.isclose(learn.pred, pred.logits))
+    assert isinstance(learn.pred, torch.Tensor)
+    assert torch.all(torch.isclose(learn.pred, logits))
 
 
 @pytest.fixture
-def pred() -> SequenceClassifierOutput:
-    return SequenceClassifierOutput(logits=torch.tensor([0.1, 0.2, 0.3]))
+def logits() -> torch.Tensor:
+    return torch.tensor([0.1, 0.2, 0.3])
+
+
+@pytest.fixture
+def pred(logits: torch.FloatTensor) -> SequenceClassifierOutput:
+    return SequenceClassifierOutput(logits=logits)
 
 
 @pytest.fixture

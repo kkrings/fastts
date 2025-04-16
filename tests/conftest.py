@@ -23,10 +23,12 @@ from fastts.transforms.block import TransformersTextBlock
 
 @pytest.fixture(scope="session")
 def tokenizer(tmp_path_factory: pytest.TempPathFactory) -> PreTrainedTokenizerBase:
-    return AutoTokenizer.from_pretrained(
+    tokenizer = AutoTokenizer.from_pretrained(
         "distilbert/distilbert-base-uncased",
         cache_dir=tmp_path_factory.mktemp("tokenizer"),
     )
+
+    return cast(PreTrainedTokenizerBase, tokenizer)
 
 
 @pytest.fixture(scope="session")

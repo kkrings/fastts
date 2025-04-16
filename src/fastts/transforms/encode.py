@@ -1,3 +1,5 @@
+from typing import cast
+
 from fastai.text.all import Transform, typedispatch  # type: ignore
 from transformers import BatchEncoding, PreTrainedTokenizerBase  # type: ignore
 
@@ -17,6 +19,8 @@ class TokenizeText(Transform):  # type: ignore
         self._truncation = truncation
 
     def encodes(self, text: TextBatch) -> BatchEncoding:
-        return self._tokenizer(
+        batch_encoding = self._tokenizer(
             list(text), padding=True, truncation=self._truncation, return_tensors="pt"
         )
+
+        return cast(BatchEncoding, batch_encoding)
