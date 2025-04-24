@@ -17,6 +17,15 @@ wheels = [
 ]
 
 [[package]]
+name = "beartype"
+version = "0.20.2"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/8a/99/eaf0847301a6ca2042927c83f8cc72a29c153132ce49d9a720fe121440ba/beartype-0.20.2.tar.gz", hash = "sha256:38c60c065ad99364a8c767e8a0e71ba8263d467b91414ed5dcffb7758a2e8079", size = 1410390 }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/78/05/536d025b3e17cf938f836665dde32e86f65ee76acd0ae14e22bda6aee274/beartype-0.20.2-py3-none-any.whl", hash = "sha256:5171a91ecf01438a59884f0cde37d2d5da2c992198b53d6ba31db3940f47ff04", size = 1161292 },
+]
+
+[[package]]
 name = "blis"
 version = "1.2.0"
 source = { registry = "https://pypi.org/simple" }
@@ -158,6 +167,15 @@ dependencies = [
 sdist = { url = "https://files.pythonhosted.org/packages/71/0b/a47d78ed2816db100543b504fdbfc2070f422aac858e6bcf775713e37b8a/cloudpathlib-0.20.0.tar.gz", hash = "sha256:f6ef7ca409a510f7ba4639ba50ab3fc5b6dee82d6dff0d7f5715fd0c9ab35891", size = 45149 }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/1f/6e/b64600156934dab14cc8b403095a9ea8bd722aad2e775673c68346b76220/cloudpathlib-0.20.0-py3-none-any.whl", hash = "sha256:7af3bcefbf73392ae7f31c08b3660ec31607f8c01b7f6262d4d73469a845f641", size = 52547 },
+]
+
+[[package]]
+name = "cloudpickle"
+version = "3.1.1"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/52/39/069100b84d7418bc358d81669d5748efb14b9cceacd2f9c75f550424132f/cloudpickle-3.1.1.tar.gz", hash = "sha256:b216fa8ae4019d5482a8ac3c95d8f6346115d8835911fd4aefd1a445e4242c64", size = 22113 }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/7e/e8/64c37fadfc2816a7701fa8a6ed8d87327c7d54eacfbfb6edab14a2f2be75/cloudpickle-3.1.1-py3-none-any.whl", hash = "sha256:c8c5a44295039331ee9dad40ba100a9c7297b6f988e50e87ccdf3765a668350e", size = 20992 },
 ]
 
 [[package]]
@@ -311,17 +329,20 @@ wheels = [
 
 [[package]]
 name = "fastai"
-version = "2.7.19"
+version = "2.8.1"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
+    { name = "cloudpickle" },
     { name = "fastcore" },
     { name = "fastdownload" },
     { name = "fastprogress" },
+    { name = "fasttransform" },
     { name = "matplotlib" },
     { name = "packaging" },
     { name = "pandas" },
     { name = "pillow" },
     { name = "pip" },
+    { name = "plum-dispatch" },
     { name = "pyyaml" },
     { name = "requests" },
     { name = "scikit-learn" },
@@ -330,21 +351,21 @@ dependencies = [
     { name = "torch" },
     { name = "torchvision" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/7c/67/24696101b9f17a053d0eb8a48faa1b43a56fad78b2e6348d33d9fa1a6ce1/fastai-2.7.19.tar.gz", hash = "sha256:0a804006d3b6364acd5544f3439f2f05d45edabaf88e2dba8893b37a66b836c8", size = 216774 }
+sdist = { url = "https://files.pythonhosted.org/packages/63/66/90489b6f0cde712946737c234c36e66db426a3e7da82eb36dca18e570d54/fastai-2.8.1.tar.gz", hash = "sha256:1fcf82865c3d66d25f0c338c1cbee3f8fe0fec08eec099e1b60da0c64161a8db", size = 217238 }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/23/bc/70d6b42278b6d4e343c552089c5e5aed6dafa45703e565ffc1ed69f6ea44/fastai-2.7.19-py3-none-any.whl", hash = "sha256:8c47d72ac28cd09671ce85f42100436b99af44e4147bd9df0495049b50708d3b", size = 234824 },
+    { url = "https://files.pythonhosted.org/packages/48/2f/63daba6df012787d5701041450aefa36949a3f967de1297bb230666f79ef/fastai-2.8.1-py3-none-any.whl", hash = "sha256:cb45f9a2abfc3bd19cf4a8193894c40abed52a7e1259fd959565bdd397194f6b", size = 235270 },
 ]
 
 [[package]]
 name = "fastcore"
-version = "1.7.29"
+version = "1.8.1"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "packaging" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/a1/a6/f457241a8a5c42b80ef50b96e7cc515dd93bdb9ea273133004bbc8a6aa96/fastcore-1.7.29.tar.gz", hash = "sha256:e7e734cbe58805a22c205341c6671de562a8abba54b13eeb24cdb4486d066e31", size = 80514 }
+sdist = { url = "https://files.pythonhosted.org/packages/1b/57/4f2f658ffa0641aa629909d850d7d67df11d4fc809ad9f197f19cc0eab19/fastcore-1.8.1.tar.gz", hash = "sha256:82494b84925fc80bbcfc21c65208dd4c125df70e3d465ef788d75d42cc2afc58", size = 75352 }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/d7/3a/a0b1c764426622287c9b6547d4ea637c406bc884141814df4a5ebab3ab9b/fastcore-1.7.29-py3-none-any.whl", hash = "sha256:76fd4815eabbed704faca3abfea4b7e1f98b6351ba6c869a2d405f37bc4b0074", size = 84208 },
+    { url = "https://files.pythonhosted.org/packages/67/9b/93bd0191c4dd1e0e378c08509f63d7694b32e99568209bd81b3ee632df9c/fastcore-1.8.1-py3-none-any.whl", hash = "sha256:51ae5d328d7864c0dd70081b32a852ff242b70af372b4dcec204969e92356afd", size = 78125 },
 ]
 
 [[package]]
@@ -367,6 +388,19 @@ source = { registry = "https://pypi.org/simple" }
 sdist = { url = "https://files.pythonhosted.org/packages/95/52/77c827febdf8aac3b0840ce0edb7c34cbd330fab9bbe032c2a79ec8f2d51/fastprogress-1.0.3.tar.gz", hash = "sha256:7a17d2b438890f838c048eefce32c4ded47197ecc8ea042cecc33d3deb8022f5", size = 14920 }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/a7/8f/213223fdee199c55db81e2d0c669f30e8285c5be2526c4ed924de39247da/fastprogress-1.0.3-py3-none-any.whl", hash = "sha256:6dfea88f7a4717b0a8d6ee2048beae5dbed369f932a368c5dd9caff34796f7c5", size = 12744 },
+]
+
+[[package]]
+name = "fasttransform"
+version = "0.0.2"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "fastcore" },
+    { name = "plum-dispatch" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/fe/f6/f170a877686ae6a6ff0e35a1c74ffc4e863bd72d11d12e724178d3bb90b8/fasttransform-0.0.2.tar.gz", hash = "sha256:18ea6964128be779a1c483d4775f1b5a2e452f915c2d30dfa2d91adca98453d7", size = 17740 }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/47/3d/4b85b47a7e70d5c7cc0cf7d7b2883646c9c0bd3ef54a33f23d5873aa910c/fasttransform-0.0.2-py3-none-any.whl", hash = "sha256:72fd7f5d577797370e95255a005a5fd4eb43a3d863f5dbab338562421ab660e1", size = 14576 },
 ]
 
 [[package]]
@@ -393,7 +427,7 @@ stubs = [
 
 [package.metadata]
 requires-dist = [
-    { name = "fastai", specifier = ">=2.7.19" },
+    { name = "fastai", specifier = ">=2.8.1" },
     { name = "transformers", specifier = ">=4.51.3" },
 ]
 
@@ -1274,6 +1308,20 @@ source = { registry = "https://pypi.org/simple" }
 sdist = { url = "https://files.pythonhosted.org/packages/96/2d/02d4312c973c6050a18b314a5ad0b3210edb65a906f868e31c111dede4a6/pluggy-1.5.0.tar.gz", hash = "sha256:2cffa88e94fdc978c4c574f15f9e59b7f4201d439195c3715ca9e2486f1d0cf1", size = 67955 }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/88/5f/e351af9a41f866ac3f1fac4ca0613908d9a41741cfcf2228f4ad853b697d/pluggy-1.5.0-py3-none-any.whl", hash = "sha256:44e1ad92c8ca002de6377e165f3e0f1be63266ab4d554740532335b9d75ea669", size = 20556 },
+]
+
+[[package]]
+name = "plum-dispatch"
+version = "2.5.7"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "beartype" },
+    { name = "rich" },
+    { name = "typing-extensions" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/f4/46/ab3928e864b0a88a8ae6987b3da3b7ae32fe0a610264f33272139275dab5/plum_dispatch-2.5.7.tar.gz", hash = "sha256:a7908ad5563b93f387e3817eb0412ad40cfbad04bc61d869cf7a76cd58a3895d", size = 35452 }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/2b/31/21609a9be48e877bc33b089a7f495c853215def5aeb9564a31c210d9d769/plum_dispatch-2.5.7-py3-none-any.whl", hash = "sha256:06471782eea0b3798c1e79dca2af2165bafcfa5eb595540b514ddd81053b1ede", size = 42612 },
 ]
 
 [[package]]

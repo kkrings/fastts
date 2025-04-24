@@ -1,12 +1,11 @@
 from typing import cast
 
-from fastai.text.all import Transform, typedispatch  # type: ignore
+from fasttransform import Transform  # type: ignore
 from transformers import BatchEncoding, PreTrainedTokenizerBase  # type: ignore
 
 from fastts.types.textbatch import TextBatch
 
 
-@typedispatch  # type: ignore
 def text_to_text_batch(text: str) -> TextBatch:
     return TextBatch((text,))
 

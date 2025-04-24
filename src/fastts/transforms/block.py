@@ -1,4 +1,5 @@
-from fastai.text.all import SortedDL, Transform, TransformBlock  # type: ignore
+from fastai.text.all import SortedDL, TransformBlock  # type: ignore
+from fasttransform import Transform  # type: ignore
 from transformers import PreTrainedTokenizerBase  # type: ignore
 
 from fastts.transforms.decode import DecodeInputIds, input_ids_to_tensor_text

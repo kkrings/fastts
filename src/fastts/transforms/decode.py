@@ -1,13 +1,8 @@
-from fastai.text.all import (  # type: ignore
-    TensorText,
-    TitledStr,
-    Transform,
-    typedispatch,
-)
+from fastai.text.all import TensorText, TitledStr  # type: ignore
+from fasttransform import Transform  # type: ignore
 from transformers import BatchEncoding, PreTrainedTokenizerBase  # type: ignore
 
 
-@typedispatch  # type: ignore
 def input_ids_to_tensor_text(tokens: BatchEncoding) -> TensorText:
     return TensorText(tokens.input_ids)
 
