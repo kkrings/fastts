@@ -74,7 +74,7 @@ def df() -> pd.DataFrame:
 
 @pytest.fixture
 def dls(dblock: DataBlock, df: pd.DataFrame) -> DataLoaders:
-    return dblock.dataloaders(df, bs=1)
+    return dblock.dataloaders(df, bs=1, num_workers=0)
 
 
 @pytest.fixture
