@@ -18,6 +18,7 @@ build-backend = "hatchling.build"
 
 [dependency-groups]
 dev = [
+    "hf-xet>=1.1.0",
     "mypy>=1.15.0",
     "pandas>=2.2.3",
     "pre-commit>=4.2.0",
