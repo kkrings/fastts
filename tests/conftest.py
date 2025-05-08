@@ -2,7 +2,6 @@ from typing import cast
 
 import pandas as pd
 import pytest
-import torch
 from fastai.text.all import (  # type: ignore
     ColReader,
     ColSplitter,
@@ -12,8 +11,8 @@ from fastai.text.all import (  # type: ignore
     RegressionBlock,
 )
 from transformers import (  # type: ignore
-    AutoModelForSequenceClassification,
     AutoTokenizer,
+    DistilBertForSequenceClassification,
     PreTrainedTokenizerBase,
 )
 
@@ -32,14 +31,16 @@ def tokenizer(tmp_path_factory: pytest.TempPathFactory) -> PreTrainedTokenizerBa
 
 
 @pytest.fixture(scope="session")
-def model(tmp_path_factory: pytest.TempPathFactory) -> torch.nn.Module:
-    model = AutoModelForSequenceClassification.from_pretrained(
+def model(
+    tmp_path_factory: pytest.TempPathFactory,
+) -> DistilBertForSequenceClassification:
+    model = DistilBertForSequenceClassification.from_pretrained(
         "distilbert/distilbert-base-uncased",
         cache_dir=tmp_path_factory.mktemp("model"),
         num_labels=1,
     )
 
-    return cast(torch.nn.Module, model)
+    return cast(DistilBertForSequenceClassification, model)
 
 
 @pytest.fixture
@@ -78,5 +79,5 @@ def dls(dblock: DataBlock, df: pd.DataFrame) -> DataLoaders:
 
 
 @pytest.fixture
-def learn(dls: DataLoaders, model: torch.nn.Module) -> Learner:
+def learn(dls: DataLoaders, model: DistilBertForSequenceClassification) -> Learner:
     return Learner(dls, model, cbs=list(sequence_classification(loss_from_model=True)))
