@@ -18,6 +18,7 @@ from transformers import (  # type: ignore
 )
 
 from fastts.callbacks.classification.sequence import sequence_classification
+from fastts.learner.splitter import BodyHeadSplitter
 from fastts.transforms.block import TransformersTextBlock
 
 
@@ -84,4 +85,10 @@ def dls(dblock: DataBlock, df: pd.DataFrame) -> DataLoaders:
 
 @pytest.fixture
 def learn(dls: DataLoaders, model: DistilBertForSequenceClassification) -> Learner:
-    return Learner(dls, model, cbs=list(sequence_classification(loss_from_model=True)))
+    return Learner(
+        dls,
+        model,
+        cbs=list(sequence_classification(loss_from_model=True)),
+        splitter=BodyHeadSplitter(body=model.base_model),  # type: ignore
+        train_bn=False,
+    )
