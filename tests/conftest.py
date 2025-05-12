@@ -1,3 +1,4 @@
+from pathlib import Path
 from typing import cast
 
 import pandas as pd
@@ -21,22 +22,25 @@ from fastts.transforms.block import TransformersTextBlock
 
 
 @pytest.fixture(scope="session")
-def tokenizer(tmp_path_factory: pytest.TempPathFactory) -> PreTrainedTokenizerBase:
+def cache_root_dir(tmp_path_factory: pytest.TempPathFactory) -> Path:
+    return tmp_path_factory.mktemp("cache")
+
+
+@pytest.fixture
+def tokenizer(cache_root_dir: Path) -> PreTrainedTokenizerBase:
     tokenizer = AutoTokenizer.from_pretrained(
         "distilbert/distilbert-base-uncased",
-        cache_dir=tmp_path_factory.mktemp("tokenizer"),
+        cache_dir=cache_root_dir / "tokenizer",
     )
 
     return cast(PreTrainedTokenizerBase, tokenizer)
 
 
-@pytest.fixture(scope="session")
-def model(
-    tmp_path_factory: pytest.TempPathFactory,
-) -> DistilBertForSequenceClassification:
+@pytest.fixture
+def model(cache_root_dir: Path) -> DistilBertForSequenceClassification:
     model = DistilBertForSequenceClassification.from_pretrained(
         "distilbert/distilbert-base-uncased",
-        cache_dir=tmp_path_factory.mktemp("model"),
+        cache_dir=cache_root_dir / "model",
         num_labels=1,
     )
 
