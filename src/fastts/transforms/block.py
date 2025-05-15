@@ -11,7 +11,7 @@ class TransformersTextBlock(TransformBlock):  # type: ignore
         self,
         tokenizer: PreTrainedTokenizerBase,
         truncation: bool = False,
-        dl_type: TfmdDL | None = None,
+        dl_type: type[TfmdDL] | None = None,
     ) -> None:
         super().__init__(
             type_tfms=[
